@@ -1,6 +1,7 @@
 # SourceCopy
 
-SourceCopy is a terminal-based utility designed to streamline working with local source code alongside large language models (LLMs). It allows you to browse directories, select files, and copy their contents to the clipboard—optionally formatted in Markdown—for quick integration into LLM workflows.
+Terminal-based utility designed to streamline working with local source code alongside large language models (LLMs).
+It allows you to browse directories, select files, and copy their contents to the clipboard —optionally preformatted in Markdown— for quick integration into LLM workflows.
 
 ## Features
 
@@ -12,9 +13,8 @@ SourceCopy is a terminal-based utility designed to streamline working with local
 ## Prerequisites
 
 - g++ compiler
-- ncurses library (e.g., libncurses5-dev on Debian/Ubuntu)
+- ncurses library (e.g., libncurses5-dev on Debian/Ubuntu, ncurses on arch)
 - xclip (for clipboard support)
-- Zsh (optional, for PATH setup in ~/.zshrc)
 
 ## Installation
 
@@ -42,28 +42,23 @@ SourceCopy is a terminal-based utility designed to streamline working with local
 
 ## Usage
 
-Run the program:
+With sourceCopy being available in your PATH, simply run it from your project's root dir:
 ```
 sourceCopy
 ```
+You'll be able to browse the project dir from here.
+The upper window shows the current directory's contents ([D] for directories, [X] for selected files).
+The lower window lists selected files.
 
-- **J/K**: Move cursor up/down in the file list.
-- **H**: Navigate up one directory.
-- **Space/L**: Toggle file selection or enter a directory.
+### Keys
+
+- **J/K/Down/Up**: Move cursor down/up in the file list.
+- **H/Backspace**: Navigate to the parent directory.
+- **L/Space**: Toggle file selection or enter a directory.
 - **B**: Toggle Markdown formatting (ON by default).
-- **Enter**: Copy selected file contents to the clipboard.
+- **Y/Enter**: Copy content of all selected files to the clipboard.
 - **Q**: Quit.
-
-The upper window shows the current directory's contents ([D] for directories, [X] for selected files). The lower window lists selected files.
 
 ## Example
 
 Select a few source files, press Enter, and paste the clipboard contents into your LLM interface—formatted and ready to go!
-
-## License
-
-MIT License. See LICENSE file for details.
-
-## Contributing
-
-Pull requests and issues are welcome! Feel free to improve features or add support for other shells beyond Zsh.

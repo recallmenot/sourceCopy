@@ -4,7 +4,6 @@
 #include <string>
 #include <cstring>
 #include <algorithm>
-#include <fstream>
 #include <sstream>
 #include <sys/stat.h>
 #include <unistd.h>
@@ -24,10 +23,10 @@ private:
     std::string last_dir_name;
 
     void resizeWindows() {
-        getmaxyx(stdscr, max_y, max_x);  // Update dimensions
+        getmaxyx(stdscr, max_y, max_x);
         wresize(upper_win, max_y / 2, max_x);
         wresize(lower_win, max_y / 2, max_x);
-        mvwin(lower_win, max_y / 2, 0);  // Reposition lower window
+        mvwin(lower_win, max_y / 2, 0);
     }
 
     void refreshUpper() {
@@ -58,10 +57,10 @@ private:
         }
         mvwprintw(lower_win, 0, 1, "Selected Files");
         if (current_dir == ".") {
-            mvwprintw(lower_win, max_y / 2 - 1, 1, "J/K: Down/Up | Space/L: Toggle/Enter | B: Markdown [%s] | Enter: Copy | Q: Quit", 
+            mvwprintw(lower_win, max_y / 2 - 1, 1, "J/K/Down/Up: Down/Up | L/Space: Toggle File/Enter Dir | B: Markdown [%s] | Y/Enter: Copy Contents | Q: Quit",
                      use_markdown ? "ON" : "OFF");
         } else {
-            mvwprintw(lower_win, max_y / 2 - 1, 1, "J/K: Down/Up | H: Up Dir | Space/L: Toggle/Enter | B: Markdown [%s] | Enter: Copy | Q: Quit", 
+            mvwprintw(lower_win, max_y / 2 - 1, 1, "J/K/Down/Up: Down/Up | H/Backspace: Parent Dir | L/Space: Toggle File/Enter Dir | B: Markdown [%s] | Y/Enter: Copy Contents | Q: Quit",
                      use_markdown ? "ON" : "OFF");
         }
         wrefresh(lower_win);
@@ -204,6 +203,7 @@ public:
                     }
                     break;
                 case 'h':
+                case KEY_BACKSPACE:
                     navigateUp();
                     break;
                 case ' ':
@@ -237,6 +237,7 @@ public:
                     }
                     break;
                 case '\n':
+                case 'y':
                     copyToClipboard();
                     break;
                 case 'b':

@@ -1,3 +1,4 @@
 sourceCopy
 sourceCopy.o
 compile_commands.json
+.cache
