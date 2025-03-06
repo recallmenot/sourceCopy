@@ -20,8 +20,8 @@ It allows you to browse directories, select files, and copy their contents to th
 
 1. Clone the repository:
    ```
-   git clone https://github.com/yourusername/sourcecopy.git_
-   cd sourcecopy_
+   git clone https://github.com/yourusername/sourcecopy.git
+   cd sourcecopy
    ```
 
 2. Build the program:
@@ -36,7 +36,7 @@ It allows you to browse directories, select files, and copy their contents to th
 
 4. (Optional) Add ~/.local/bin to your PATH in Zsh:
    ```
-   make zsh_user_path_add_
+   make zsh_user_path_add
    ```
    Follow the prompt to source ~/.zshrc or restart your shell.
 
