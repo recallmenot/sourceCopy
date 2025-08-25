@@ -106,9 +106,15 @@ private:
             command << "{ ";
             for (size_t i = 0; i < selected_files.size(); i++) {
                 std::string fname = selected_files[i];
+                // Convert relative path to absolute path by prepending base_dir
+                std::string abs_path = base_dir + "/" + fname;
+                struct stat st;
+                if (stat(abs_path.c_str(), &st) != 0) {
+                    continue; // Skip files that don't exist
+                }
                 size_t pos = 0;
-                while ((pos = fname.find_first_of("'\\", pos)) != std::string::npos) {
-                    fname.insert(pos, "\\");
+                while ((pos = abs_path.find_first_of("'\\", pos)) != std::string::npos) {
+                    abs_path.insert(pos, "\\");
                     pos += 2;
                 }
                 if (i > 0) command << " && ";
@@ -117,7 +123,7 @@ private:
                 } else {
                     command << "echo '=== " << fname << " ===' && ";
                 }
-                command << "cat '" << fname << "' && ";
+                command << "cat '" << abs_path << "' && ";
                 if (use_markdown) {
                     command << "echo '```' && ";
                 }
