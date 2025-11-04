@@ -28,6 +28,12 @@ It allows you to browse directories, select files, and copy their contents to th
    ```
    make
    ```
+   or on NixOS:
+   ```
+   nix-shell
+   make
+   ```
+
 
 3. Install to ~/.local/bin:
    ```
